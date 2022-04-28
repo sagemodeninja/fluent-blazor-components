@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Port of Windows 11 Fluent UI to Blazor
+Port of Windows 11 Fluent UI to Blazor.
 
 ### Credits
 #### Authors
