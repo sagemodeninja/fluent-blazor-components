@@ -13,6 +13,10 @@
     <Description>Port of Windows 11 Fluent UI to Blazor</Description>
     <Copyright>Copyright © 2022 Gary Antier</Copyright>
     <PackageTags>fluent,windows 11,blazor</PackageTags>
+    <PackageProjectUrl>https://github.com/sagemodeninja/fluent-blazor-components</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/sagemodeninja/fluent-blazor-components</RepositoryUrl>
+    <PackageLicenseFile>D:\Personal\Projects\Blazor\Fluent\fluent-blazor-components\fluent-blazor-components\LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
 
 
@@ -26,6 +30,13 @@
 
   <ItemGroup>
     <Folder Include="Utilities\Enums\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

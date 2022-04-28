@@ -1,17 +1,4 @@
-﻿if (window.Element && !Element.prototype.closest) {
-    Element.prototype.closest = function (s) {
-        var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-            i,
-            el = this;
-        do {
-            i = matches.length;
-            while (--i >= 0 && matches.item(i) !== el) { };
-        } while ((i < 0) && (el = el.parentElement));
-        return el;
-    };
-}
-
-(function () {
+﻿(function () {
     const template = document.createElement("template");
     template.innerHTML = `
     <style>
@@ -133,55 +120,80 @@
             this.selectedEvent = new CustomEvent("selected");
         }
 
-        get tag() { return this.getAttribute("tag") }
-        set tag(value) { this.setAttribute(tag, value) }
-
-        get href() { return this.getAttribute("href") }
-        set href(value) { this.setAttribute("href", value) }
-
-        get iconName() { return this.getAttribute("icon") }
-
-        get icon() { this._icon.textContent }
-        set icon(value) { this._icon.innerHTML = value }
+        get parentView() {
+            this._parentView ??= (this.closest("fluent-navigation-view") ?? this.getRootNode().host);
+            return this._parentView;
+        }
 
         get isParent() {
-            return this._subMenu !== null;
+            return this.subMenu !== null;
+        }
+
+        get subMenu() {
+            this._subMenu ??= this.querySelector("fluent-navigation-view-menu-items");
+            return this._subMenu;
         }
 
         get selectsOnInvoke() {
-            var selectsOnInvoke = eval(this.getAttribute("selects-on-invoke"));
+            const selectsOnInvoke = eval(this.getAttribute("selects-on-invoke"));
             return selectsOnInvoke == null || selectsOnInvoke;
         }
 
-        connectedCallback() {
-            this._parentView = this.closest("fluent-navigation-view") ?? this.getRootNode().host;
-            this._parentMenu = this.closest("fluent-navigation-view-item fluent-navigation-view-menu-items");
-            this._subMenu = this.querySelector("fluent-navigation-view-menu-items");
-            this._button = this.shadowRoot.querySelector("div.button");
-            this._icon = this.shadowRoot.querySelector(".icon");
-            this._chevron = this.shadowRoot.querySelector(".chevron");
+        get iconSpan() {
+            this._iconSpan ??= this.shadowRoot.querySelector(".icon");
+            return this._iconSpan;
+        }
 
-            const content = this._button.querySelector("span.content");
+        get iconName() {
+            return this.getAttribute("icon");
+        }
+
+        get icon() {
+            return this.iconSpan.innerHTML;
+        }
+
+        set icon(value) {
+            this.iconSpan.innerHTML = value;
+        }
+
+        get tag() {
+            return this.getAttribute("tag");
+        }
+
+        set tag(value) {
+            this.setAttribute(tag, value);
+        }
+
+        connectedCallback() {
+            const parentMenu = this.closest("fluent-navigation-view-item fluent-navigation-view-menu-items");
+            const button = this.shadowRoot.querySelector("div.button");
+            const content = button.querySelector("span.content");
+
             content.textContent = this.getAttribute("content");
-            
-            if (this._parentMenu !== null) {
+
+            if (parentMenu !== null) {
                 this._toggleOffset();
-                this._parentView.addEventListener("invoked", this._toggleOffset);
+                this.parentView.addEventListener("invoked", this._toggleOffset);
             }
 
             // Chevron
-            this._chevron.style.display = this._subMenu !== null ? "block" : "none";
+            customElements
+                .whenDefined("fluent-navigation-view-menu-items")
+                .then(_ => {
+                    const chevron = this.shadowRoot.querySelector(".chevron");
+                    chevron.style.display = this.subMenu !== null ? "block" : "none";
+                });
 
-            this._button.addEventListener("click", e => {
+            button.addEventListener("click", e => {
                 if (this.selectsOnInvoke) {
                     this.setAttribute("active", "");
                     this.dispatchEvent(this.selectedEvent);
                 }
                 
-                var activeMenu = this._parentView.activeMenuItem;
-                var parentIsExpanded = this._parentView.classList.contains("expanded");
+                var activeMenu = this.parentView.activeMenuItem;
+                var parentIsExpanded = this.parentView.classList.contains("expanded");
 
-                if (!parentIsExpanded && (this._subMenu === null || activeMenu !== this._subMenu)) {
+                if (!parentIsExpanded && (this.subMenu === null || activeMenu !== this.subMenu)) {
                     activeMenu?.classList?.remove("expanded");
                     activeMenu?.parentItem.classList.remove("expanded");
                 }
@@ -191,7 +203,7 @@
         }
 
         _toggleOffset() {
-            this.classList.toggle("with-offset", this._parentView.classList.contains("expanded"));
+            this.classList.toggle("with-offset", this.parentView.classList.contains("expanded"));
         }
     }
 
@@ -407,13 +419,27 @@
             return items;
         }
 
+        get paneTitle() {
+            this._paneTitle ??= this.shadowRoot.querySelector(".pane-title");
+            return this._paneTitle;
+        }
+
+        get contentHeader() {
+            this._contentHeader ??= this.shadowRoot.querySelector(".content-header");
+            return this._contentHeader;
+        }
+
+        get contentTitle() {
+            this._contentTitle ??= this.shadowRoot.querySelector(".content-title");
+            return this._contentTitle;
+        }
+
+        get settingsItem() {
+            this._settingsItem ??= this.shadowRoot.querySelector(".settings-item");
+            return this._settingsItem;
+        }
+
         connectedCallback() {
-            this._header = this.shadowRoot.querySelector(".content-header");
-            this._title = this.shadowRoot.querySelector(".content-title");
-            this._pane = this.shadowRoot.querySelector(".navigation-pane");
-            this._navButton = this.shadowRoot.querySelector(".nav-button");
-            this._paneTitle = this.shadowRoot.querySelector("span.pane-title");
-            this._settingsItem = this.shadowRoot.querySelector(".settings-item");
 
             // Defaults.
             this._updateDisplayMode();
@@ -426,7 +452,8 @@
             this._updateSettingsVisible();
 
             // Event listeners
-            this._navButton.addEventListener("click", e => {
+            const navButton = this.shadowRoot.querySelector(".nav-button");
+            navButton.addEventListener("click", e => {
                 this.classList.toggle("expanded");
                 this.dispatchEvent(new CustomEvent("invoked"));
 
@@ -434,10 +461,8 @@
             });
 
             customElements
-                .whenDefined('fluent-navigation-view-item')
+                .whenDefined("fluent-navigation-view-item")
                 .then(_ => {
-                    console.log(this.items);
-
                     this.items.forEach(item => {
                         if (item.hasAttribute("active")) {
                             this._selectedItem = item;
@@ -454,7 +479,8 @@
                     });
                 });
 
-            this._pane.addEventListener("click", e => e.stopPropagation());
+            const navPane = this.shadowRoot.querySelector(".navigation-pane");
+            navPane.addEventListener("click", e => e.stopPropagation());
 
             window.addEventListener("click", () => {
                 this._dismissPane();
@@ -491,20 +517,20 @@
             const title = this.getAttribute("header");
             const alwaysShowHeader = eval(this.getAttribute("always-show-header"));
 
-            this._title.textContent = title;
-            this._header.style.display = alwaysShowHeader === undefined || alwaysShowHeader ? "block" : "none";
+            this.contentTitle.textContent = title;
+            this.contentHeader.style.display = alwaysShowHeader === undefined || alwaysShowHeader ? "block" : "none";
         }
 
         _updatePaneTitle() {
             const title = this.getAttribute("pane-title");
 
-            this._paneTitle.textContent = title;
+            this.paneTitle.textContent = title;
             this.classList.toggle("no-title", (title ?? "") === "");
         }
 
         _updateSettingsVisible() {
-            var isSettingsVisible = eval(this.getAttribute("is-settings-visible"));
-            this._settingsItem.style.display = isSettingsVisible === undefined || isSettingsVisible ? "flex" : "none";
+            const isSettingsVisible = eval(this.getAttribute("is-settings-visible"));
+            this.settingsItem.style.display = isSettingsVisible === undefined || isSettingsVisible ? "flex" : "none";
         }
 
         _updateIcons(iconSet) {
@@ -594,37 +620,42 @@
             this._toggleMode = this._toggleMode.bind(this);
         }
 
-        get parentItem() { return this._parentItem }
+        get parentView() {
+            this._parentView ??= this.closest("fluent-navigation-view");
+            return this._parentView;
+        }
+
+        get parentItem() {
+            this._parentItem ??= this.closest("fluent-navigation-view-item");
+            return this._parentItem;
+        }
 
         connectedCallback() {
-            this._parentView = this.closest("fluent-navigation-view");
-            this._parentItem = this.closest("fluent-navigation-view-item");
-            
-            if (this._parentItem === null)
+            if (this.parentItem === null)
                 return;
 
             this.classList.add("sub-menu-item");
             this._toggleMode();
 
-            this._parentView.addEventListener("invoked", this._toggleMode);
-            this._parentItem.addEventListener("invoked", () => {
+            this.parentView.addEventListener("invoked", this._toggleMode);
+            this.parentItem.addEventListener("invoked", () => {
                 const expanded = this.classList.toggle("expanded");
 
-                this._parentItem.classList.toggle("expanded", expanded);
-                this._parentView.activeMenuItem = expanded && this.classList.contains("compact-mode") ? this : null;
+                this.parentItem.classList.toggle("expanded", expanded);
+                this.parentView.activeMenuItem = expanded && this.classList.contains("compact-mode") ? this : null;
             });
 
             this.addEventListener("click", e => e.stopPropagation());
         }
 
         _toggleMode() {
-            var compactMode = !this._parentView.classList.contains("expanded");
+            const compactMode = !this.parentView.classList.contains("expanded");
 
             this.classList.toggle("compact-mode", compactMode);
 
             if (compactMode) {
                 this.classList.toggle("expanded", false);
-                this._parentItem.classList.remove("expanded");
+                this.parentItem.classList.remove("expanded");
             }
         }
     }
@@ -674,18 +705,21 @@
             this._toggleVisibility = this._toggleVisibility.bind(this);
         }
 
-        connectedCallback() {
-            this._parentView = this.closest("fluent-navigation-view");
-            this._content = this.shadowRoot.querySelector("span.content");
+        get parentView() {
+            this._parentView ??= this.closest("fluent-navigation-view");
+            return this._parentView;
+        }
 
-            this._content.textContent = this.getAttribute("content");
+        connectedCallback() {
+            const content = this.shadowRoot.querySelector("span.content");
+            content.textContent = this.getAttribute("content");
 
             this._toggleVisibility();
-            this._parentView.addEventListener("invoked", this._toggleVisibility);
+            this.parentView.addEventListener("invoked", this._toggleVisibility);
         }
 
         _toggleVisibility() {
-            this.classList.toggle("visible", this._parentView.classList.contains("expanded"));
+            this.classList.toggle("visible", this.parentView.classList.contains("expanded"));
         }
     }
 
