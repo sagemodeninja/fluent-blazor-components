@@ -1,0 +1,97 @@
+﻿@using sagemode_fluent_blazor_components.Utilities.Enums
+@using sagemode_fluent_blazor_components.Utilities.Classes
+@inherits LayoutComponentBase
+
+<div class="page">
+    <main>
+        <FluentNavigationView IconSets="@_iconSets"
+                              PaneDisplayMode="PaneDisplayMode.Left"
+                              Header="Blazor Component"
+                              PaneTitle="Blazor Title"
+                              AlwaysShowHeader="true"
+                              IsSettingsVisible="true">
+
+            <FluentNavigationViewMenuItems>
+                <FluentNavigationViewItem Icon="Home"
+                                          Content="Home"
+                                          Tag="Home">
+                </FluentNavigationViewItem>
+
+                <FluentNavigationViewItemHeader Content="Actions"></FluentNavigationViewItemHeader>
+
+                <FluentNavigationViewItem Icon="Contact"
+                                          Content="Account"
+                                          Tag="Account"
+                                          SelectsOnInvoke="false">
+
+                    <FluentNavigationViewMenuItems>
+
+                        <FluentNavigationViewItem Icon="Mail"
+                                                  Content="Mail"
+                                                  Tag="Mail">
+
+                        </FluentNavigationViewItem>
+                        <FluentNavigationViewItem Icon="Calendar"
+                                                  Content="Calendar"
+                                                  Tag="Calendar" active>
+                        </FluentNavigationViewItem>
+
+                    </FluentNavigationViewMenuItems>
+
+                </FluentNavigationViewItem>
+
+                <FluentNavigationViewItem Icon="Page" 
+                                          Content="Document options" 
+                                          Tag="Document options"
+                                          SelectsOnInvoke="false">
+
+                    <FluentNavigationViewMenuItems>
+
+                        <FluentNavigationViewItem Icon="NewFolder"
+                                                  Content="Create new"
+                                                  Tag="Create new">
+                        </FluentNavigationViewItem>
+                        
+                        <FluentNavigationViewItem Icon="OpenLocal"
+                                                  Content="Upload file"
+                                                  Tag="Upload file">
+                        </FluentNavigationViewItem>
+                    
+                    </FluentNavigationViewMenuItems>
+
+                </FluentNavigationViewItem>
+
+            </FluentNavigationViewMenuItems>
+
+            <div slot="content-frame">
+                @Body
+            </div>
+
+        </FluentNavigationView>
+    </main>
+</div>
+
+@code
+{
+    private List<IconSet> _iconSets;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _iconSets = new List<IconSet>
+            {
+                new() { Name = "Home", Glyph = "e80f" },
+                new() { Name = "Contact", Glyph = "e77b" },
+                new() { Name = "Mail", Glyph = "e715" },
+                new() { Name = "Calendar", Glyph = "e787" },
+                new() { Name = "Page", Glyph = "e7c3" },
+                new() { Name = "NewFolder", Glyph = "e8f4" },
+                new() { Name = "OpenLocal", Glyph = "e8da" },
+                new() { Name = "Settings", Glyph = "e713" }
+            };
+
+            StateHasChanged();
+        }
+    }
+}

@@ -1,0 +1,15 @@
+﻿@using System.Text.Json
+@using sagemode_fluent_blazor_components.Utilities.Classes
+
+@inherits FluentComponentBase
+
+<fluent-navigation-view @ref=Element
+                        pane-display-mode="@PaneDisplayMode?.ToString().ToLower()"
+                        icon-set=@(JsonSerializer.Serialize(IconSets).Replace("\"", "'"))
+                        header="@Header"
+                        pane-title="@PaneTitle"
+                        always-show-header="@AlwaysShowHeader"
+                        is-settings-visible="@IsSettingsVisible"
+                        @attributes="AdditionalAttributes">
+    @ChildContent
+</fluent-navigation-view>

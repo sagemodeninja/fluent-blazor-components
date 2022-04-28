@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fluent-blazor-components", "src\fluent-blazor-components\fluent-blazor-components.csproj", "{FED3BF50-9F3A-4972-B804-8CCCFDD59837}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fluent-blazor-components-gallery", "src\fluent-blazor-components-gallery\fluent-blazor-components-gallery.csproj", "{6670B28E-78CC-40FE-B009-81CABBC04429}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FED3BF50-9F3A-4972-B804-8CCCFDD59837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FED3BF50-9F3A-4972-B804-8CCCFDD59837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FED3BF50-9F3A-4972-B804-8CCCFDD59837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FED3BF50-9F3A-4972-B804-8CCCFDD59837}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6670B28E-78CC-40FE-B009-81CABBC04429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6670B28E-78CC-40FE-B009-81CABBC04429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6670B28E-78CC-40FE-B009-81CABBC04429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6670B28E-78CC-40FE-B009-81CABBC04429}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74DD651A-3562-474B-A96A-B42147C38BAF}
+	EndGlobalSection
+EndGlobal
