@@ -1,8 +1,8 @@
-# Fluent Navigation View Web Component
+# Fluent Blazor Components
 
 ### Introduction
 
-Web component implementation of Windows 11's Navigation View.
+Port of Windows 11 Fluent UI to Blazor.
 
 ### Credits
 #### Authors
