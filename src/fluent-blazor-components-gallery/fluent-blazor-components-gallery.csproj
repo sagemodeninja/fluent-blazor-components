@@ -15,4 +15,8 @@
     <ProjectReference Include="..\fluent-blazor-components\fluent-blazor-components.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\" />
+  </ItemGroup>
+
 </Project>

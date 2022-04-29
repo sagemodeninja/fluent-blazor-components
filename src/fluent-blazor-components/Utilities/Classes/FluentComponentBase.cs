@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace sagemode_fluent_blazor_components;
+namespace sagemode_fluent_blazor_components.Utilities.Classes;
 
 public abstract class FluentComponentBase : ComponentBase
 {

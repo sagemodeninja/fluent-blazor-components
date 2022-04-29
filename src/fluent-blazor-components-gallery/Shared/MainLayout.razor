@@ -1,61 +1,43 @@
 ﻿@using sagemode_fluent_blazor_components.Utilities.Enums
 @using sagemode_fluent_blazor_components.Utilities.Classes
+
 @inherits LayoutComponentBase
+
+@inject NavigationManager Navigation
 
 <div class="page">
     <main>
         <FluentNavigationView IconSets="@_iconSets"
                               PaneDisplayMode="PaneDisplayMode.LeftCompact"
-                              Header="Blazor Component"
+                              Header="@_headerTitle"
                               AlwaysShowHeader="true"
-                              IsSettingsVisible="true">
+                              IsSettingsVisible="true"
+                              OnSelectionChanged="OnNavigationSelectionChanged">
 
             <FluentNavigationViewMenuItems>
                 <FluentNavigationViewItem Icon="Home"
                                           Content="Home"
-                                          Tag="Home">
+                                          Tag="0">
                 </FluentNavigationViewItem>
 
-                <FluentNavigationViewItemHeader Content="Actions"></FluentNavigationViewItemHeader>
+                <FluentNavigationViewItemHeader Content="Pages"></FluentNavigationViewItemHeader>
 
-                <FluentNavigationViewItem Icon="Contact"
-                                          Content="Account"
-                                          Tag="Account"
+                <FluentNavigationViewItem Icon="ToolTip"
+                                          Content="Samples"
                                           SelectsOnInvoke="false">
 
                     <FluentNavigationViewMenuItems>
 
-                        <FluentNavigationViewItem Icon="Mail"
-                                                  Content="Mail"
-                                                  Tag="Mail">
+                        <FluentNavigationViewItem Icon="Dial2"
+                                                  Content="Counter"
+                                                  Tag="1">
 
                         </FluentNavigationViewItem>
-                        <FluentNavigationViewItem Icon="Calendar"
-                                                  Content="Calendar"
-                                                  Tag="Calendar" active>
+                        <FluentNavigationViewItem Icon="Brightness"
+                                                  Content="Weather forecast"
+                                                  Tag="2">
                         </FluentNavigationViewItem>
 
-                    </FluentNavigationViewMenuItems>
-
-                </FluentNavigationViewItem>
-
-                <FluentNavigationViewItem Icon="Page" 
-                                          Content="Document options" 
-                                          Tag="Document options"
-                                          SelectsOnInvoke="false">
-
-                    <FluentNavigationViewMenuItems>
-
-                        <FluentNavigationViewItem Icon="NewFolder"
-                                                  Content="Create new"
-                                                  Tag="Create new">
-                        </FluentNavigationViewItem>
-                        
-                        <FluentNavigationViewItem Icon="OpenLocal"
-                                                  Content="Upload file"
-                                                  Tag="Upload file">
-                        </FluentNavigationViewItem>
-                    
                     </FluentNavigationViewMenuItems>
 
                 </FluentNavigationViewItem>
@@ -73,6 +55,18 @@
 @code
 {
     private List<IconSet> _iconSets;
+    private string _headerTitle = "Blazor Components";
+
+    private List<string> _headerTitles;
+    private List<string> _navigationPages;
+    
+    protected override Task OnInitializedAsync()
+    {
+        _headerTitles = new List<string> { "Home", "Counter", "Weather forecast" };
+        _navigationPages = new List<string> { "", "counter", "fetchdata" };
+
+        return base.OnInitializedAsync();
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -81,16 +75,24 @@
             _iconSets = new List<IconSet>
             {
                 new() { Name = "Home", Glyph = "e80f" },
-                new() { Name = "Contact", Glyph = "e77b" },
-                new() { Name = "Mail", Glyph = "e715" },
-                new() { Name = "Calendar", Glyph = "e787" },
-                new() { Name = "Page", Glyph = "e7c3" },
-                new() { Name = "NewFolder", Glyph = "e8f4" },
-                new() { Name = "OpenLocal", Glyph = "e8da" },
+                new() { Name = "ToolTip", Glyph = "e82f" },
+                new() { Name = "Dial2", Glyph = "f147" },
+                new() { Name = "Brightness", Glyph = "e706" },
                 new() { Name = "Settings", Glyph = "e713" }
             };
 
             StateHasChanged();
         }
+    }
+
+    private void OnNavigationSelectionChanged(NavigationViewSelectionChangedEventArgs args)
+    {
+        if(args.IsSettingsSelected)
+            return;
+
+        var index = int.Parse(args.SelectedItem.Tag);
+
+        _headerTitle = _headerTitles[index];
+        Navigation.NavigateTo(_navigationPages[index]);
     }
 }
