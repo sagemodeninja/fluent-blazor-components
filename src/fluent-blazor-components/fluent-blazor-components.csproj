@@ -16,7 +16,7 @@
     <PackageProjectUrl>https://github.com/sagemodeninja/fluent-blazor-components</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/sagemodeninja/fluent-blazor-components</RepositoryUrl>
-    <PackageLicenseFile>D:\Personal\Projects\Blazor\Fluent\fluent-blazor-components\fluent-blazor-components\LICENSE.md</PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
 
