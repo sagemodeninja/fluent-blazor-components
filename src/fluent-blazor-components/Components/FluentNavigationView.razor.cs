@@ -25,5 +25,11 @@ public partial class FluentNavigationView : FluentComponentBase
     public bool? IsSettingsVisible { get; set; }
 
     [Parameter]
+    public bool? SelectsOnLoad { get; set; }
+
+    [Parameter]
+    public HeaderSource? HeaderSrc { get; set; }
+
+    [Parameter]
     public EventCallback<NavigationViewSelectionChangedEventArgs> OnSelectionChanged { get; set; }
 }

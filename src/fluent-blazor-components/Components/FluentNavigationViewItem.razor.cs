@@ -15,5 +15,8 @@ public partial class FluentNavigationViewItem : FluentComponentBase
     public string? Tag { get; set; }
 
     [Parameter]
+    public string? Href { get; set; }
+
+    [Parameter]
     public bool? SelectsOnInvoke { get; set; }
 }

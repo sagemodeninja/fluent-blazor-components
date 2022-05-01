@@ -12,12 +12,14 @@
                               Header="@_headerTitle"
                               AlwaysShowHeader="true"
                               IsSettingsVisible="true"
+                              SelectsOnLoad="true"
                               OnSelectionChanged="OnNavigationSelectionChanged">
 
             <FluentNavigationViewMenuItems>
                 <FluentNavigationViewItem Icon="Home"
                                           Content="Home"
-                                          Tag="0">
+                                          Tag="Home"
+                                          Href="/">
                 </FluentNavigationViewItem>
 
                 <FluentNavigationViewItemHeader Content="Pages"></FluentNavigationViewItemHeader>
@@ -30,12 +32,14 @@
 
                         <FluentNavigationViewItem Icon="Dial2"
                                                   Content="Counter"
-                                                  Tag="1">
+                                                  Tag="Counter"
+                                                  Href="counter">
 
                         </FluentNavigationViewItem>
                         <FluentNavigationViewItem Icon="Brightness"
                                                   Content="Weather forecast"
-                                                  Tag="2">
+                                                  Tag="Weather forecast"
+                                                  Href="fetchdata">
                         </FluentNavigationViewItem>
 
                     </FluentNavigationViewMenuItems>
@@ -55,18 +59,7 @@
 @code
 {
     private List<IconSet> _iconSets;
-    private string _headerTitle = "Blazor Components";
-
-    private List<string> _headerTitles;
-    private List<string> _navigationPages;
-    
-    protected override Task OnInitializedAsync()
-    {
-        _headerTitles = new List<string> { "Home", "Counter", "Weather forecast" };
-        _navigationPages = new List<string> { "", "counter", "fetchdata" };
-
-        return base.OnInitializedAsync();
-    }
+    private string _headerTitle = "Home";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -90,9 +83,7 @@
         if(args.IsSettingsSelected)
             return;
 
-        var index = int.Parse(args.SelectedItem.Tag);
-
-        _headerTitle = _headerTitles[index];
-        Navigation.NavigateTo(_navigationPages[index]);
+        _headerTitle = args.SelectedItem.Tag;
+        Navigation.NavigateTo(args.SelectedItem.Href);
     }
 }

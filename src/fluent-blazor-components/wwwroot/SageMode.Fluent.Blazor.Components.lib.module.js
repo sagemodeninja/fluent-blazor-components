@@ -5,7 +5,8 @@
             return {
                 isSettingsSelected: args.isSettingsSelected,
                 selectedItem: {
-                    tag: args.selectedItem.tag
+                    tag: args.selectedItem.tag,
+                    href: args.selectedItem.href
                 }
             };
         }

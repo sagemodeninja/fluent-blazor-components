@@ -3,4 +3,6 @@
 public class SelectedItem
 {
     public string Tag { get; set; }
+
+    public string Href { get; set; }
 }

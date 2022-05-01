@@ -8,8 +8,10 @@
                         icon-set=@(JsonSerializer.Serialize(IconSets).Replace("\"", "'"))
                         header="@Header"
                         pane-title="@PaneTitle"
-                        always-show-header="@AlwaysShowHeader"
-                        is-settings-visible="@IsSettingsVisible"
+                        always-show-header="@AlwaysShowHeader.ToString().ToLower()"
+                        is-settings-visible="@IsSettingsVisible.ToString().ToLower()"
+                        selects-on-load="@SelectsOnLoad"
+                        header-src="@HeaderSrc?.ToString().ToLower()"
                         @onselectionchanged="@OnSelectionChanged"
                         @attributes="AdditionalAttributes">
     @ChildContent
