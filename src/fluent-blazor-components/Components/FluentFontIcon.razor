@@ -1,0 +1,12 @@
+﻿@using sagemode_fluent_blazor_components.Utilities.Classes;
+
+@inherits FluentComponentBase
+
+<fluent-font-icon @ref="Element"
+                  font-family="@FontFamily"
+                  glyph="@Glyph"
+                  font-size="@FontSize"
+                  foreground="@Foreground"
+                  @attributes="@AdditionalAttributes">
+    @ChildContent
+</fluent-font-icon>

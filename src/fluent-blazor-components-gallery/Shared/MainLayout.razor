@@ -7,8 +7,7 @@
 
 <div class="page">
     <main>
-        <FluentNavigationView IconSets="@_iconSets"
-                              PaneDisplayMode="PaneDisplayMode.LeftCompact"
+        <FluentNavigationView PaneDisplayMode="PaneDisplayMode.LeftCompact"
                               Header="@_headerTitle"
                               AlwaysShowHeader="true"
                               IsSettingsVisible="true"
@@ -20,6 +19,8 @@
                                           Content="Home"
                                           Tag="Home"
                                           Href="/">
+                    
+                    <FluentImageIcon Source="https://docs.microsoft.com/en-us/windows/apps/design/style/images/glyphs/segoe-fluent-icons/e706.png" slot="icon"></FluentImageIcon>
                 </FluentNavigationViewItem>
 
                 <FluentNavigationViewItemHeader Content="Pages"></FluentNavigationViewItemHeader>
@@ -58,25 +59,7 @@
 
 @code
 {
-    private List<IconSet> _iconSets;
     private string _headerTitle = "Home";
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            _iconSets = new List<IconSet>
-            {
-                new() { Name = "Home", Glyph = "e80f" },
-                new() { Name = "ToolTip", Glyph = "e82f" },
-                new() { Name = "Dial2", Glyph = "f147" },
-                new() { Name = "Brightness", Glyph = "e706" },
-                new() { Name = "Settings", Glyph = "e713" }
-            };
-
-            StateHasChanged();
-        }
-    }
 
     private void OnNavigationSelectionChanged(NavigationViewSelectionChangedEventArgs args)
     {

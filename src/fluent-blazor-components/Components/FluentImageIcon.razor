@@ -1,0 +1,10 @@
+﻿@using sagemode_fluent_blazor_components.Utilities.Classes;
+
+@inherits FluentComponentBase
+
+<fluent-image-icon @ref="Element"
+                  source="@Source"
+                  size="@Size"
+                  @attributes="@AdditionalAttributes">
+    @ChildContent
+</fluent-image-icon>
