@@ -10,9 +10,6 @@ public partial class FluentNavigationView : FluentComponentBase
     public PaneDisplayMode? PaneDisplayMode { get; set; }
 
     [Parameter]
-    public IEnumerable<IconSet>? IconSets { get; set; }
-
-    [Parameter]
     public string? Header { get; set; }
 
     [Parameter]

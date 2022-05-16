@@ -3,9 +3,8 @@
 
 @inherits FluentComponentBase
 
-<fluent-navigation-view @ref=Element
+<fluent-navigation-view @ref="Element"
                         pane-display-mode="@PaneDisplayMode?.ToString().ToLower()"
-                        icon-set=@(JsonSerializer.Serialize(IconSets).Replace("\"", "'"))
                         header="@Header"
                         pane-title="@PaneTitle"
                         always-show-header="@AlwaysShowHeader.ToString().ToLower()"
