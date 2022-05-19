@@ -1,0 +1,12 @@
+﻿@using sagemode_fluent_blazor_components.Utilities.Classes;
+
+@inherits FluentComponentBase
+
+<fluent-app-bar-button @ref="Element"
+                       icon="@Icon"
+                       label="@Label"
+                       modifier="@Modifier"
+                       key="@Key"
+                       @attributes="@AdditionalAttributes">
+    @ChildContent
+</fluent-app-bar-button>

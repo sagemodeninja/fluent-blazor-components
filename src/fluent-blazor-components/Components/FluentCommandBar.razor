@@ -1,0 +1,9 @@
+﻿@using sagemode_fluent_blazor_components.Utilities.Classes;
+
+@inherits FluentComponentBase
+
+<fluent-command-bar @ref="Element"
+                    is-open="@IsOpen"
+                    @attributes="@AdditionalAttributes">
+    @ChildContent
+</fluent-command-bar>

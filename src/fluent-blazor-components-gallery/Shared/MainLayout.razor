@@ -7,7 +7,7 @@
 
 <div class="page">
     <main>
-        <FluentNavigationView PaneDisplayMode="PaneDisplayMode.LeftCompact"
+        <FluentNavigationView PaneDisplayMode="PaneDisplayMode.Left"
                               Header="@_headerTitle"
                               AlwaysShowHeader="true"
                               IsSettingsVisible="true"
@@ -34,17 +34,35 @@
                         <FluentNavigationViewItem Icon="Dial2"
                                                   Content="Counter"
                                                   Tag="Counter"
-                                                  Href="counter">
+                                                  Href="/counter">
 
                         </FluentNavigationViewItem>
                         <FluentNavigationViewItem Icon="Brightness"
                                                   Content="Weather forecast"
                                                   Tag="Weather forecast"
-                                                  Href="fetchdata">
+                                                  Href="/fetchdata">
                         </FluentNavigationViewItem>
 
                     </FluentNavigationViewMenuItems>
 
+                </FluentNavigationViewItem>
+                
+                <FluentNavigationViewItem Icon="Save"
+                                          Content="Menus and Toolbars"
+                                          SelectsOnInvoke="false">
+                    <FluentNavigationViewMenuItems>
+                        <FluentNavigationViewItem Content="AppBarButton"
+                                                  Tag="AppBarButton"
+                                                  Href="/commandbar/appbarbutton">
+                            <FluentImageIcon Source="images/AppBarButtonIcon.png" slot="icon"></FluentImageIcon>
+                        </FluentNavigationViewItem>
+
+                        <FluentNavigationViewItem Content="CommandBar"
+                                                  Tag="CommandBar"
+                                                  Href="/commandbar">
+                            <FluentImageIcon Source="images/CommandBarIcon.png" slot="icon"></FluentImageIcon>
+                        </FluentNavigationViewItem>
+                    </FluentNavigationViewMenuItems>
                 </FluentNavigationViewItem>
 
             </FluentNavigationViewMenuItems>
