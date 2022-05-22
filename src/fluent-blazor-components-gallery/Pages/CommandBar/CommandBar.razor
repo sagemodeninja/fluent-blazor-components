@@ -9,64 +9,64 @@
 
 <div id="command_bar_container">
     <FluentCommandBar>
-    <FluentAppBarButton Icon="Add"
-                        Label="Add"
-                        Modifier="Control"
-                        Key="A"
-                        @onclick=@(()=>CommandClicked("Add"))>
-    </FluentAppBarButton>
-    <FluentAppBarButton Icon="Edit"
-                        Label="Edit"
-                        Modifier="Control"
-                        Key="E"
-                        @onclick=@(()=>CommandClicked("Edit"))
-                        disabled>
-    </FluentAppBarButton>
-    <FluentAppBarSeparator></FluentAppBarSeparator>
-    <FluentAppBarButton Icon="Share"
-                        Label="Share"
-                        Key="F4"
-                        @onclick=@(()=>CommandClicked("Share"))>
-    </FluentAppBarButton>
-
-    <FluentCommandBarSecondaryCommands>
-        <FluentAppBarButton Icon="Settings"
-                            Label="Settings"
-                            Modifier="Control"
-                            Key="I"
-                            @onclick=@(()=>CommandClicked("Settings"))>
-        </FluentAppBarButton>
-        
         <FluentAppBarButton Icon="Add"
-                            Label="Button 1"
-                            Modifier="Alt"
-                            Key="N"
-                            @onclick=@(()=>CommandClicked("Button 1"))>
+                            Label="Add"
+                            Modifier="Control"
+                            Key="A"
+                            @onclick=@(()=>CommandClicked("Add"))>
         </FluentAppBarButton>
-        
-        <FluentAppBarButton Icon="Delete"
-                            Label="Button 2"
-                            Key="Delete"
-                            @onclick=@(()=>CommandClicked("Button 2"))>
+        <FluentAppBarButton Icon="Edit"
+                            Label="Edit"
+                            Modifier="Control"
+                            Key="E"
+                            @onclick=@(()=>CommandClicked("Edit"))
+                            disabled>
         </FluentAppBarButton>
-
         <FluentAppBarSeparator></FluentAppBarSeparator>
-
-        <FluentAppBarButton Icon="FontDecrease"
-                            Label="Button 3"
-                            Modifier="Control"
-                            Key="-"
-                            @onclick=@(()=>CommandClicked("Button 3"))>
+        <FluentAppBarButton Icon="Share"
+                            Label="Share"
+                            Key="F4"
+                            @onclick=@(()=>CommandClicked("Share"))>
         </FluentAppBarButton>
 
-        <FluentAppBarButton Icon="FontIncrease"
-                            Label="Button 1"
-                            Modifier="Control"
-                            Key="+"
-                            @onclick=@(()=>CommandClicked("Button 4"))>
-        </FluentAppBarButton>
-    </FluentCommandBarSecondaryCommands>
-</FluentCommandBar>
+        <FluentCommandBarSecondaryCommands>
+            <FluentAppBarButton Icon="Settings"
+                                Label="Settings"
+                                Modifier="Control"
+                                Key="I"
+                                @onclick=@(()=>CommandClicked("Settings"))>
+            </FluentAppBarButton>
+            
+            <FluentAppBarButton Icon="Add"
+                                Label="Button 1"
+                                Modifier="Alt"
+                                Key="N"
+                                @onclick=@(()=>CommandClicked("Button 1"))>
+            </FluentAppBarButton>
+            
+            <FluentAppBarButton Icon="Delete"
+                                Label="Button 2"
+                                Key="Delete"
+                                @onclick=@(()=>CommandClicked("Button 2"))>
+            </FluentAppBarButton>
+
+            <FluentAppBarSeparator></FluentAppBarSeparator>
+
+            <FluentAppBarButton Icon="FontDecrease"
+                                Label="Button 3"
+                                Modifier="Control"
+                                Key="-"
+                                @onclick=@(()=>CommandClicked("Button 3"))>
+            </FluentAppBarButton>
+
+            <FluentAppBarButton Icon="FontIncrease"
+                                Label="Button 1"
+                                Modifier="Control"
+                                Key="+"
+                                @onclick=@(()=>CommandClicked("Button 4"))>
+            </FluentAppBarButton>
+        </FluentCommandBarSecondaryCommands>
+    </FluentCommandBar>
 </div>
 
 <p>You Clicked: @_command</p>
