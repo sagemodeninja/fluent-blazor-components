@@ -12,3 +12,7 @@
         }
     });
 }
+
+window.FluentNavigationViewInterop = {
+    navigate: (href, navigation) => navigation.navigate(href)
+}

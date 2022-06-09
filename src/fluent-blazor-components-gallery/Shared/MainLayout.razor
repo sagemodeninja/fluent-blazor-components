@@ -7,7 +7,8 @@
 
 <div class="page">
     <main>
-        <FluentNavigationView PaneDisplayMode="PaneDisplayMode.Left"
+        <FluentNavigationView @ref="_navigationView"
+                              PaneDisplayMode="PaneDisplayMode.Left"
                               Header="@_headerTitle"
                               AlwaysShowHeader="true"
                               IsSettingsVisible="true"
@@ -82,6 +83,18 @@
 @code
 {
     private string _headerTitle = "Home";
+    private FluentNavigationView _navigationView;
+
+    protected override void OnInitialized()
+    {
+        Navigation.LocationChanged += LocationChanged;
+        base.OnInitialized();
+    }
+
+    private void LocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        _navigationView.Navigate(e.Location);
+    }
 
     private void OnNavigationSelectionChanged(NavigationViewSelectionChangedEventArgs args)
     {
