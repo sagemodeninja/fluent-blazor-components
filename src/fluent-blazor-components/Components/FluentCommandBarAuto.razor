@@ -1,0 +1,18 @@
+﻿@using sagemode_fluent_blazor_components.Utilities.Classes;
+
+@typeparam TItem
+@inherits FluentComponentBase
+
+<fluent-command-bar @ref="Element"
+                    default-label-position=@(DefaultLabelPosition?.ToString().ToLower() ?? "right")
+                    is-open="@IsOpen"
+                    @attributes="@AdditionalAttributes">
+    @if(Items != null && ItemTemplate != null)
+    {
+        foreach (var item in Items)
+        {
+            @ItemTemplate(item)
+        }
+    }
+    @ChildContent
+</fluent-command-bar>

@@ -1,5 +1,7 @@
 ﻿@page "/commandbar"
 
+@using fluentblazorcomponentsgallery
+
 <PageTitle>CommandBar</PageTitle>
 <style>
     #command_bar_container {
@@ -36,14 +38,14 @@
                                 Key="I"
                                 @onclick=@(()=>CommandClicked("Settings"))>
             </FluentAppBarButton>
-            
+
             <FluentAppBarButton Icon="Add"
                                 Label="Button 1"
                                 Modifier="Alt"
                                 Key="N"
                                 @onclick=@(()=>CommandClicked("Button 1"))>
             </FluentAppBarButton>
-            
+
             <FluentAppBarButton Icon="Delete"
                                 Label="Button 2"
                                 Key="Delete"
@@ -71,8 +73,34 @@
 
 <p>You Clicked: @_command</p>
 
+
+<h1 style="font-size:24px;">FluentCommandBarAuto</h1>
+<div>
+    <FluentCommandBarAuto TItem=AppCommandBar
+                          Items=_items>
+        <ItemTemplate>
+            <FluentAppBarButton Icon=@context.Icon
+                                Label=@context.Label
+                                Modifier=@context.Modifier
+                                Key=@context.Key
+                                @onclick=@(()=>CommandClicked(context.Command))
+                                disable=@(!context.Enabled) />
+        </ItemTemplate>
+    </FluentCommandBarAuto>
+</div>
+
 @code {
     private string? _command;
+    private List<AppCommandBar> _items = new();
+
+    protected override void OnInitialized()
+    {
+        _items = new List<AppCommandBar>
+        {
+            new AppCommandBar { Icon = "Add", Label = "Add", Command = "Add", Modifier = "Control", Key = "A", Enabled = true },
+            new AppCommandBar { Icon = "Edit", Label = "Edit", Command = "Edit", Modifier = "Control", Key = "E", Enabled = true },
+        };
+    }
 
     private void CommandClicked(string command)
     {
