@@ -6,6 +6,7 @@
 <fluent-command-bar @ref="Element"
                     default-label-position=@(DefaultLabelPosition?.ToString().ToLower() ?? "right")
                     is-open="@IsOpen"
+                    custom-menu=@CustomMenu
                     @onmenuinvoked=@OnMenuInvoked
                     @oncommandmoved=@OnCommandMoved
                     @attributes="@AdditionalAttributes">
