@@ -9,7 +9,16 @@ public class NavigationViewSelectionChangedEventArgs : EventArgs
     public SelectedItem SelectedItem { get; set; }
 }
 
-[EventHandler("onselectionchanged", typeof(NavigationViewSelectionChangedEventArgs), enableStopPropagation: true, enablePreventDefault: true)]
-public static class EventHandlers
+public class CommandBarCommandMovedEventArgs : EventArgs
 {
+    public string? Type { get; set; }
+
+    public string? Command { get; set; }
+
+    public bool Collapsed { get; set; }
 }
+
+[EventHandler("onselectionchanged", typeof(NavigationViewSelectionChangedEventArgs), enableStopPropagation: true, enablePreventDefault: true)]
+[EventHandler("onmenuinvoked", typeof(EventArgs), enableStopPropagation: true, enablePreventDefault: true)]
+[EventHandler("oncommandmoved", typeof(CommandBarCommandMovedEventArgs), enableStopPropagation: true, enablePreventDefault: true)]
+public static class EventHandlers { }

@@ -1,6 +1,7 @@
 ﻿@page "/commandbar"
 
 @using fluentblazorcomponentsgallery
+@using sagemode_fluent_blazor_components.Utilities.Classes
 
 <PageTitle>CommandBar</PageTitle>
 <style>
@@ -10,7 +11,9 @@
 </style>
 
 <div id="command_bar_container">
-    <FluentCommandBar>
+    <FluentCommandBar CustomMenu=@true
+                      OnMenuInvoked=@OnMenuInvoked
+                      OnCommandMoved=@OnCommandMoved>
         <FluentAppBarButton Icon="Add"
                             Label="Add"
                             Modifier="Control"
@@ -100,6 +103,16 @@
             new AppCommandBar { Icon = "Add", Label = "Add", Command = "Add", Modifier = "Control", Key = "A", Enabled = true },
             new AppCommandBar { Icon = "Edit", Label = "Edit", Command = "Edit", Modifier = "Control", Key = "E", Enabled = true },
         };
+    }
+
+    private void OnMenuInvoked()
+    {
+        Console.WriteLine("Was invoked!");
+    }
+
+    private void OnCommandMoved(CommandBarCommandMovedEventArgs arg)
+    {
+        Console.WriteLine($"{arg.Command} was {(!arg.Collapsed ? "not" : "")} collapsed.");
     }
 
     private void CommandClicked(string command)

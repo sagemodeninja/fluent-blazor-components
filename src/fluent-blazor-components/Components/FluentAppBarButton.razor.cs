@@ -10,6 +10,8 @@ namespace sagemode_fluent_blazor_components.Components
 
         [Parameter] public string? Label { get; set; }
 
+        [Parameter] public string? Command { get; set; }
+
         [Parameter] public CommandBarAppearance? Appearance { get; set; }
 
         [Parameter] public string? Modifier { get; set; }

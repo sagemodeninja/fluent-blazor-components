@@ -11,6 +11,10 @@
             };
         }
     });
+
+    Blazor.registerCustomEventType("commandmoved", {
+        createEventArgs: event => event.detail
+    });
 }
 
 window.FluentNavigationViewInterop = {

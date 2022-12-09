@@ -17,6 +17,12 @@ namespace sagemode_fluent_blazor_components.Components
         [Parameter] public CommandBarAppearance? DefaultLabelPosition { get; set; }
 
         [Parameter] public bool? IsOpen { get; set; }
+
+        [Parameter]
+        public EventCallback<EventArgs> OnMenuInvoked { get; set; }
+
+        [Parameter]
+        public EventCallback<CommandBarCommandMovedEventArgs> OnCommandMoved { get; set; }
     }
 }
 
